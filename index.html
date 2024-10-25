@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Krupa Infrahub</title>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+/* slider styling  */
+/* slider  */
+.hero-slider {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide-background {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 1; /* Ensure content is above the overlay */
+        }
+
+        .slide-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .slide-content p {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* Ensure nav is above the overlay */
+        }
+
+        .slider-nav button {
+            background: transparent;
+            border: none;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin: 0 5px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .slider-nav button.active {
+            opacity: 1;
+        }
+
+
+        /* products we deal with 000 */
+        .pwdw{
+            padding: 30px;
+        }
+
+        .parent {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 8px;
+            height: 40vh;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .parent > div {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .parent > div:hover {
+            transform: scale(1.02);
+        }
+
+        .parent > div img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .div1 {
+            grid-row: span 5 / span 5;
+        }
+
+        .div2 {
+            grid-column: span 2 / span 2;
+            grid-row: span 3 / span 3;
+        }
+
+        .div3 {
+            grid-row: span 2 / span 2;
+            grid-column-start: 2;
+            grid-row-start: 4;
+        }
+
+        .div4 {
+            grid-row: span 2 / span 2;
+            grid-column-start: 3;
+            grid-row-start: 4;
+        }
+
+        .div5 {
+            grid-row: span 5 / span 5;
+            grid-column-start: 4;
+            grid-row-start: 1;
+        }
+
+        @media (max-width: 768px) {
+            .parent {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                height: auto;
+            }
+
+            .div1, .div2, .div3, .div4, .div5 {
+                grid-column: auto;
+                grid-row: auto;
+                aspect-ratio: 1;
+            }
+        }
+
+
+        
+        /* marquee styling  */
+        /* marquee section */
+.marquee-section {
+  background-color: var(--black);
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 1600px;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* marquee content animation */
+.marquee-content {
+  display: inline-block;
+  animation: marquee 30s linear infinite;
+  animation-play-state: running;
+  will-change: transform;
+}
+
+.marquee-item {
+  display: inline-block; 
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  
+  margin-left: 40px;
+}
+
+/* setting image size and fit */
+.marquee-item img {
+  width: 50%;
+  height: 50%;
+  object-fit: contain; 
+  transition: filter 0.9s ease;
+}
+
+/* keyframes for the scrolling animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee-section:hover .marquee-content {
+  animation-play-state: paused; 
+}
+
+/* contact with us  */
+.wrapper {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .title {
+            text-align: center;
+            color: #0B1829;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .link-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background-color: #0B1829;
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            position: relative;
+            transition: transform 0.2s ease;
+        }
+
+        .link-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+        }
+
+        .link-item span {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .link-item::after {
+            content: '›';
+            position: absolute;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        @media (max-width: 600px) {
+            .link-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+            .link-item span {
+            font-size: 0.6rem;
+            font-weight: 300;
+        }
+            .wrapper {
+                margin: 1rem auto;
+            }
+        }
+        /* how we work  */
+        .roadmap-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .roadmap {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-top: 50px;
+    }
+
+   
+    .stop {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      flex: 1;
+      padding: 0 15px;
+    }
+
+    .circle {
+      width: 100px;
+      height: 100px;
+      background: #00A1FF;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      transition: transform 0.3s;
+    }
+
+    .circle:hover {
+      transform: scale(1.1);
+    }
+
+    .icon {
+      color: white;
+      font-size: 40px;
+    }
+
+    .heading {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #1e293b;
+    }
+
+    .text {
+      color: #64748b;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .roadmap {
+        flex-direction: column;
+        margin-top: 20px;
+      }
+
+      .stop {
+        padding: 20px 0;
+      }
+
+      .circle {
+        width: 80px;
+        height: 80px;
+      }
+
+      .icon {
+        font-size: 30px;
+      }
+
+      .heading {
+        font-size: 1.25rem;
+      }
+    }
+
+    /* Small mobile devices */
+    @media (max-width: 480px) {
+      .roadmap-container {
+        padding: 10px;
+      }
+
+      .circle {
+        width: 60px;
+        height: 60px;
+      }
+
+      .icon {
+        font-size: 24px;
+      }
+
+      .heading {
+        font-size: 1.1rem;
+      }
+
+      .text {
+        font-size: 0.9rem;
+      }
+    }
+
+        /* why kruupa trade hub  */
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .title {
+            color: #1a2b3c;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #4a5b6c;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin-bottom: 40px;
+        }
+        .features-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .feature-item {
+            flex-basis: calc(14.28% - 20px);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background-color: #ffe6e6;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px;
+        }
+        .icon-wrapper img {
+            width: 30px;
+            height: 30px;
+        }
+        .feature-text {
+            font-size: 0.9rem;
+            color: #333;
+            margin: 0;
+        }
+        @media (max-width: 1024px) {
+            .feature-item {
+                flex-basis: calc(25% - 20px);
+            }
+        }
+        @media (max-width: 768px) {
+            .feature-item {
+                flex-basis: calc(33.33% - 20px);
+            }
+        }
+        @media (max-width: 480px) {
+            .feature-item {
+                flex-basis: calc(50% - 20px);
+            }
+        }
+        @media (max-width: 320px) {
+            .feature-item {
+                flex-basis: 100%;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="main-nav">
+            <div class="main-nav-container">
+                <img src="images/logo-dark.png" alt="logo-krupa" class="logo">
+                <ul class="nav-links">
+                    <div style="display: flex;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">About Us</a></li>
+                    <li><a href="" class="active">For Suppliers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    </div>
+                   <li><button class="login">login</button></li> 
+                </ul>
+                <button class="menu-toggle">☰</button>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu">
+        <button class="close-menu">✕</button>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="EProcurement.html">About Us</a></li>
+            <li><a href="Retail.html">For Manufactures</a></li>  
+            <li><a href="about.html">Contact Us</a></li>
+            <li><a href="about.html">Login</a></li>
+
+       
+        </ul>
+        
+    </div>
+
+   
+
+    <script>
+        const navbar = document.querySelector('.navbar');
+        const upperNav = document.querySelector('.upper-nav');
+        const mainNav = document.querySelector('.main-nav');
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.querySelector('.close-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                upperNav.style.transform = 'translateY(-100%)';
+                mainNav.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+                mainNav.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                mainNav.style.position='fixed';
+            } else {
+                upperNav.style.transform = 'translateY(0)';
+                mainNav.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+                mainNav.style.boxShadow = 'none';
+                mainNav.style.position='relative';4
+                mainNav.style.width='100%';
+                mainNav.style.top='0px';
+            }
+        });
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+    </script>
+
+    <main>
+        <div class="hero-slider">
+            <div class="slide active">
+                <div class="slide-background">
+                    <img src="https://www.birlapivot.com/media/.renditions/wysiwyg/desktop-first.png" alt="Steel Structure 1">
+                </div>
+               
+            </div>
+            <!-- <div class="slide">
+                <div class="slide-background">
+                    <img src="https://static.vecteezy.com/system/resources/previews/022/453/397/non_2x/silhouette-of-engineer-looking-at-construction-site-engineering-concept-double-exposure-generative-ai-free-photo.jpg" alt="Steel Structure 2">
+                </div>
+                <div class="slide-content">
+                    <h1>krupa tradehub</h1>
+                    <p></p>
+                    <a href="contact.html" style="background-color: #ff6600;color: white;padding: 7px 20px;border-radius: 10px;">Contact us</a>
+
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-background">
+                    <img src="https://www.birlapivot.com/media/.renditions/wysiwyg/desktop-second.png" alt="Steel Structure 3">
+                </div>
+                <div class="slide-content">
+                    <h1>krupa tradehub</h1>
+                    <p></p>
+                    <a href="contact.html" style="background-color: #ff6600;color: white;padding: 7px 20px;border-radius: 10px;">Contact us</a>
+
+                </div>
+            </div>
+            <div class="slider-nav"></div> -->
+        </div>
+    
+        <!-- <script>
+            const slides = document.querySelectorAll('.slide');
+            const sliderNav = document.querySelector('.slider-nav');
+            let currentSlide = 0;
+    
+            // Create navigation buttons
+            slides.forEach((_, index) => {
+                const button = document.createElement('button');
+                button.addEventListener('click', () => goToSlide(index));
+                sliderNav.appendChild(button);
+            });
+    
+            const navButtons = sliderNav.querySelectorAll('button');
+    
+            function goToSlide(n) {
+                slides[currentSlide].classList.remove('active');
+                navButtons[currentSlide].classList.remove('active');
+                currentSlide = (n + slides.length) % slides.length;
+                slides[currentSlide].classList.add('active');
+                navButtons[currentSlide].classList.add('active');
+            }
+    
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+    
+            // Initialize first slide
+            navButtons[0].classList.add('active');
+    
+            // Auto-advance slides every 5 seconds
+            setInterval(nextSlide, 5000);
+        </script> -->
+
+
+        <!-- products we deal with 00 -->
+        <section class="pwdw">
+            <h1 class="reveal" style="font-size:48px;color: #0099FF;text-align: center;font-weight: 600;">Products We Deal With</h1>
+
+            <div class="parent">
+                <div class="div1">
+                    <img src="https://5.imimg.com/data5/LR/OI/MY-39094180/cement.jpg" alt="Tall architectural photo">
+                </div>
+                <div class="div2">
+                    <img src="https://www.amardeepsteel.com/blog/what%20is%20alloy%20steel%20%20blog.png" alt="Square lifestyle image">
+                </div>
+                <div class="div3">
+                    <img src="https://www.birlapivot.com/media/.renditions/wysiwyg/doorsWindows.png" alt="Square product photo">
+                </div>
+                <div class="div4">
+                    <img src="https://www.birlapivot.com/media/.renditions/catalog/category/Tiles_and_Surfaces.jpg" alt="Square nature photo">
+                </div>
+                <div class="div5">
+                    <img src="https://www.birlapivot.com/media/.renditions/wysiwyg/SanitarywareNew.png" alt="Tall portrait photo">
+                </div>
+            </div>
+        </section>
+        
+
+
+        <!-- marquee  -->
+        <section class="marquee-section">
+            <h1 class="reveal" style="font-size:48px;color: #0099FF;text-align: center;font-weight: 600;">Shop By Brands</h1>
+
+            <div class="marquee-content">
+                <div class="marquee-item"><img src="images/1.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/2.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/3.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/4.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/5.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/6.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/7.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/8.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/9.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/10.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/11.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/12.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/13.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/14.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/15.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/16.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/17.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/18.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/19.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/20.png" alt="Client Logo"></div>
+            </div>
+            <div class="marquee-content">
+                <div class="marquee-item"><img src="images/1.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/2.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/3.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/4.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/5.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/6.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/7.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/8.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/9.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/10.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/11.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/12.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/13.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/14.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/15.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/16.png" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/17.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/18.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/19.webp" alt="Client Logo"></div>
+                <div class="marquee-item"><img src="images/20.png" alt="Client Logo"></div>
+            </div>
+        </section>
+
+
+
+        <!-- conatact with us  -->
+        <div class="wrapper" style="margin-bottom: 90px">
+            <h1 class="title">Connect With Us</h1>
+            <div class="link-grid">
+                <a href="tel:+1234567890" class="link-item">
+                    <img src="images/callus.webp" alt="Phone icon">
+                    <span>Call us</span>
+                </a>
+                <a href="https://wa.me/1234567890" class="link-item">
+                    <img src="images/whatsapp.webp" alt="WhatsApp icon">
+                    <span>Chat with us</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- how we work  -->
+         <style>
+          
+         </style>
+         <section >
+            <h1 class="reveal" style="font-size:48px;color: #0099FF;text-align: center;font-weight: 600;">How We Work</h1>
+            
+            <div class="roadmap-container">
+                <div class="roadmap">
+                  <div class="stop">
+                    <div class="circle">
+                        <i class="fa-solid fa-magnifying-glass fa-2xl" style="color: #ffffff;"></i>
+                    </div>
+                    <h3 class="heading">Find your material</h3>
+                    <p class="text">Choose form a wide range of categories or search for a special product</p>
+                  </div>
+            
+                  <div class="stop">
+                    <div class="circle">
+                        <i class="fa-solid fa-file fa-2xl" style="color: #ffffff;"></i>
+                    </div>
+                    <h3 class="heading">Request a quote</h3>
+                    <p class="text">After exploring products request for a quote</p>
+                  </div>
+            
+                  <div class="stop">
+                    <div class="circle">
+                        <i class="fa-solid fa-truck-fast fa-2xl" style="color: #ffffff;"></i>
+                    </div>
+                    <h3 class="heading">Place your order</h3>
+                    <p class="text">Apply for credit or pay online using UPI and Net Banking</p>
+                  </div>
+            
+                  <div class="stop">
+                    <div class="circle">
+                        <i class="fa-solid fa-location-crosshairs fa-2xl" style="color: #ffffff;"></i>
+                    </div>
+                    <h3 class="heading">Track your order</h3>
+                    <p class="text">Relax and enjoy a smooth delivery experience. We ensure all your materials reach you on-time at your delivery site</p>
+                  </div>
+                </div>
+              </div>
+         </section>
+
+
+        <!-- why krupa tradehub  -->
+        <div class="main-container">
+            <h1 class="title">Why Infra Hub</h1>
+            <h2 class="subtitle">Helping you transform the way you procure building raw materials.</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="SKUs icon">
+                    </div>
+                    <p class="feature-text">18000+<br>SKUs</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="Brands icon">
+                    </div>
+                    <p class="feature-text">150+ Brands<br>across India</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="Credit icon">
+                    </div>
+                    <p class="feature-text">Access to<br>Credit</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="Savings icon">
+                    </div>
+                    <p class="feature-text">Savings on<br>Material Costs</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="Tracking icon">
+                    </div>
+                    <p class="feature-text">Real-time<br>Tracking</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="Delivery icon">
+                    </div>
+                    <p class="feature-text">On-time<br>Delivery</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-wrapper">
+                        <img src="/api/placeholder/60/60" alt="Quality icon">
+                    </div>
+                    <p class="feature-text">Quality<br>Assurance</p>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- footer   -->
+        <footer class="footer">
+            <div class="footer-logo" style="width: 200px;margin: 0 auto;">
+              <img src="images/logo-white.png" alt="" style="width: 90%;">
+            </div>
+            
+            <nav class="nav-links">
+              <a href="#">Home</a>
+              <a href="#">About Us</a>
+              <a href="#">For Manufactures</a>
+              <a href="#">Contact Us</a>
+              
+            </nav>
+        
+            <div class="social-links">
+              <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0a192f"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg></a>
+              <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0a192f"><path d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z"/></svg></a>
+              <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0a192f"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
+              <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="#0a192f"><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z"/></svg></a>
+            </div>
+        
+            <div class="copyright">
+              ©2024 Krupa Trade Limited. All Rights Reserved | Caution Notice
+            </div>
+        
+            <div class="company-links">
+              <a href="#">Krupa Trade Group</a>
+              <a href="#">Krupa Industries Ltd</a>
+            </div>
+          </footer>
+    </main>
+</body>
+</html>
